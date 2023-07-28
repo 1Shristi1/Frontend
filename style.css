@@ -6,7 +6,15 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgb(97, 231, 238);
+    background-image: url('/images/cover.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-color: rgb(97, 231, 238); */
+  }
+
+  a{
+    text-decoration: none;
+    color:white;
   }
   
   .container {
@@ -14,8 +22,9 @@ body {
    
     padding: 20px; 
     border-radius: 8px; 
-    background-color: white; 
+    background-color: rgb(100, 32, 32); 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    color: white;
   }
  
   
@@ -39,8 +48,9 @@ body {
     cursor: pointer;
     margin: 10px 10px;
     width: 60%;
-    background-color: rgb(97, 231, 238);
+    background-color:  rgb(54, 6, 6);
     border: none;
+    color: white;
   }
   
   a {
