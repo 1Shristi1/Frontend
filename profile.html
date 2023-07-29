@@ -1,114 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>User Profile Page</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='profilebody.css'>
-    <!-- <script src='main.js'></script> -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js" integrity="sha512-L4lHq2JI/GoKsERT8KYa72iCwfSrKYWEyaBxzJeeITM9Lub5vlTj8tufqYk056exhjo2QDEipJrg6zen/DDtoQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>User Profile</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #profile {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 400px;
+            max-width: 100%;
+        }
+
+        button {
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
-    <div style="width: 100%; height: 50px;">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">EVENT MANAGEMENT</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto mr-3"  id="navbar-items" >
-                
-              </ul>
-            </div>
-          </nav>
-      </div>
-    <div class="container emp-profile">
-        <form method="post">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="profile-head">
-                                <h5 id="username"> 
-                                    USER PROFILE PAGE :
-                                </h5>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <!-- <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/> -->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>FIRST NAME :</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p id="fname">Namit</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>LAST NAME :</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p id="lname">Goyal</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>E-MAIL :</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p id="email">temptemp@gmail.com</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>CITY :</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p id="city">Bangalore</p>
-                                        </div>
-                                    </div>
-                        </div>
-                        
-                    <div>
-                        <h4>Interests : </h4>
-                        <input type="checkbox" id="interest1" onclick="addInterest('63d61ea5a1d10147d40c9d31','Cooking')" name="interest1" value="Cooking">
-                            <label for="interest1"  onclick="addInterest('63d61ea5a1d10147d40c9d31','Cooking')" id="lab1">Music</label><br>
-                            <input type="checkbox"  onclick="addInterest('63d61eaca1d10147d40c9d33','Reading')" id="interest2" name="interest2" value="Reading">
-                            <label for="interest2" onclick="addInterest('63d61eaca1d10147d40c9d33','Reading')" id="lab2"> Reading</label><br>
-                            <input type="checkbox" onclick="addInterest('63d61eb2a1d10147d40c9d35','Coding')" id="interest3" name="interest3" value="Coding">
-                            <label for="interest3" onclick="addInterest('63d61eb2a1d10147d40c9d35','Coding')" id="lab3"> Coding</label><br>
-                            <input type="checkbox" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="interest4" name="interest4" value="Treking">
-                            <label for="interest4" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="lab4"> Traveling</label><br>
-                            <input type="checkbox" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="interest4" name="interest4" value="Treking">
-                            <label for="interest4" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="lab4"> Gardening</label><br>
-                            <input type="checkbox" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="interest4" name="interest4" value="Treking">
-                            <label for="interest4" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="lab4"> Concerts</label><br>
-                            <input type="checkbox" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="interest4" name="interest4" value="Treking">
-                            <label for="interest4" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="lab4"> Art & Literature</label><br>
-                            <input type="checkbox" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="interest4" name="interest4" value="Treking">
-                            <label for="interest4" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="lab4"> Badminton</label><br>
-                            <input type="checkbox" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="interest4" name="interest4" value="Treking">
-                            <label for="interest4" onclick="addInterest('63d61ebca1d10147d40c9d37','Treking')" id="lab4"> Cooking</label><br>
+    <div id="profile">
+        <h1>User Profile</h1>
+        <p><strong>Name:</strong> <span id="name"></span></p>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>City:</strong> <span id="city"></span></p>
+        <p><strong>Interests:</strong></p>
+        <ul id="interests"></ul>
 
-
-                    </div>
-                    <hr>
-                    <button id="btn1">LOG OUT</button>
-                    <button id="btn2">DELETE USER</button>
-                </div>
-            </div>
-        </form>           
+        <div>
+            <button id="editInterestsBtn">Edit Interests</button>
+            <form id="addInterestForm" style="display:none;">
+                <input type="text" id="newInterest" placeholder="Enter new interest">
+                <button type="submit">Add</button>
+            </form>
+        </div>
     </div>
-   
+
+    <script src="profile.js"></script>
 </body>
 </html>
