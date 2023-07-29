@@ -1,35 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userId = localStorage.getItem('userId');
 
-   
-    // fetchUserData(userId)
-    //     .then((userId) => {
-    //         return fetchUserInterests(userId);
-    //     })
-    //     .then((userInterests) => {
-            
-    //         const userData = {
-    //             ...userInterests,
-    //             interests: userInterests.interests
-    //         };
-    //         displayUserData(userData);
-    //     })
-    //     .catch((error) => {
-    //         console.error('Error fetching user data:', error);
-    //     });
-
-    Promise.all([fetchUserData(userId),fetchUserInterests(userId)])
-    .then(([userData,userInterests]) => {
-        displayUserData(userData,userInterests);
+  
+   fetchUserData(userId)
+    .then((userData) => {
+        displayUserData(userData);
     })
     .catch((error) => {
-        console.error('error fetching user data and user interests', error);
+        console.error('error fetching user data', error);
     })
 
   
     document.getElementById('editInterestsBtn').addEventListener('click', () => {
         document.getElementById('editInterestsBtn').style.display = 'none';
         document.getElementById('addInterestForm').style.display = 'block';
+    });
+
+    document.getElementById('deleteInterestsBtn').addEventListener('click', () => {
+        document.getElementById('deleteInterestsBtn').style.display = 'none';
+        document.getElementById('deleteInterestForm').style.display = 'block';
     });
 
  
@@ -46,6 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error adding interest:', error);
             });
     });
+    document.getElementById('deleteInterestForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const interestToDelete = document.getElementById('interestToDelete').value;
+    
+      
+        deleteInterest(userId, interestToDelete)
+            .then(() => {
+               
+                location.reload();
+            })
+            .catch((error) => {
+                console.error('Error deleting interest:', error);
+            });
+    });
+
 });
 
 function fetchUserData(userId) {
@@ -58,21 +62,11 @@ function fetchUserData(userId) {
     })
 }
 
-function fetchUserInterests(userId) {
-  
-    return fetch(`http://localhost:8080/api/user/${userId}/interest`)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Network response for interests was not ok');
-            }
-            return response.json();
-        });
-}
 
 
-function displayUserData(userData, userInterests) {
+function displayUserData(userData) {
 
-    userData.interests = userInterests;
+ 
     document.getElementById('name').textContent = userData.firstName + ' ' + userData.lastName;
     document.getElementById('email').textContent = userData.email;
     document.getElementById('city').textContent = userData.city;
@@ -107,4 +101,26 @@ function addInterest(userId, newInterest) {
    .catch((error) => {
     console.log('error adding interest',error);
    })
+}
+
+function deleteInterest(userId, interestToDelete) {
+    return fetch(`http://localhost:8080/api/user/${userId}/interest`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: interestToDelete
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Network error');
+        }
+        return response.text();
+    })
+    .then((message) => {
+        console.log(message);
+    })
+    .catch((error) => {
+        console.error('Error deleting interest:', error);
+    });
 }
