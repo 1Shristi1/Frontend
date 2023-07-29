@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
    fetchUserData(userId)
     .then((userData) => {
         displayUserData(userData);
+        const eventIds = fetchEventIds(userData);
+        return fetchEventNames(eventIds);
+    })
+    .then((eventNames) => {
+        displayEventNames(eventNames);
     })
     .catch((error) => {
         console.error('error fetching user data', error);
@@ -52,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+
 function fetchUserData(userId) {
     return fetch(`http://localhost:8080/api/user/${userId}`)
     .then((res) => {
@@ -60,6 +66,40 @@ function fetchUserData(userId) {
         }
         return res.json();
     })
+}
+
+function fetchEventIds(userData)
+{
+    const eventIds = userData.events.flatMap((arr) => arr.map((event) => event.eventId));
+    return eventIds;
+}
+
+function fetchEventNames(eventIds) {
+    const eventPromises = eventIds.map((eventId) => {
+        return fetch(`http://localhost:8080/api/event/${eventId}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((eventData) => {
+                return eventData.name.text;
+            });
+    });
+
+    return Promise.all(eventPromises);
+}
+
+function displayEventNames(eventNames) {
+    const eventsList = document.getElementById('events');
+    eventsList.innerHTML = '';
+
+    eventNames.forEach((eventName) => {
+        const li = document.createElement('li');
+        li.textContent = eventName;
+        eventsList.appendChild(li);
+    });
 }
 
 
@@ -75,9 +115,10 @@ function displayUserData(userData) {
     interestsList.innerHTML = '';
 
     userData.interests.forEach((interest) => {
-        const li = document.createElement('li');
-        li.textContent = interest;
-        interestsList.appendChild(li);
+        const interestbox = document.createElement('div');
+        interestbox.textContent = interest;
+        interestbox.classList.add('interest-box');
+        interestsList.appendChild(interestbox);
     });
 }
 

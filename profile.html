@@ -1,53 +1,109 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User Profile</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: Arial, sans-serif;
             margin: 0;
+            padding: 0;
+      background-color: rgb(184, 122, 6);
         }
 
-        #profile {
-            text-align: center;
-            border: 1px solid #ccc;
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        #company-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #home-link,
+        #logout {
+            margin-left: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+
+        .profile-container {
+            width: 45%;
+            margin: 60px auto;
             padding: 20px;
-            width: 400px;
-            max-width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+
+        .interest-box {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f1f1f1;
         }
 
         button {
+            background-color: gray;
+            cursor: pointer;
             margin: 5px;
         }
     </style>
 </head>
+
 <body>
-    <div id="profile">
-        <h1>User Profile</h1>
+
+    <header>
+        <div>
+            <span id="company-name">Event Junction</span>
+        </div>
+        <div>
+            <a href="home.html" id="home-link">Home</a>
+            <a href="#" id="logout">Logout</a>
+        </div>
+    </header>
+
+
+    <div class="profile-container">
+        <h1>Profile</h1>
         <p><strong>Name:</strong> <span id="name"></span></p>
         <p><strong>Email:</strong> <span id="email"></span></p>
         <p><strong>City:</strong> <span id="city"></span></p>
-        <p><strong>Interests:</strong></p>
-        <ul id="interests"></ul>
-
         <div>
-            <button id="editInterestsBtn">Edit Interests</button>
-            <form id="addInterestForm" style="display:none;">
-                <input type="text" id="newInterest" placeholder="Enter new interest">
-                <button type="submit">Add</button>
-            </form>
-            <button id="deleteInterestsBtn">Delete Interests</button>
-            <form id="deleteInterestForm" style="display: none;">
-                <label for="interestToDelete">Delete Interest:</label>
-                <input type="text" id="interestToDelete" required>
-                <button type="submit">Delete</button>
-            </form>
+            <p><strong>Interests:</strong></p>
+            <div id="interests"></div>
+
+            <div>
+                <button id="editInterestsBtn">Edit Interests</button>
+                <form id="addInterestForm" style="display:none;">
+                    <input type="text" id="newInterest" placeholder="Enter new interest">
+                    <button type="submit">Add</button>
+                </form>
+                <button id="deleteInterestsBtn">Delete Interests</button>
+                <form id="deleteInterestForm" style="display: none;">
+                    <label for="interestToDelete">Delete Interest:</label>
+                    <input type="text" id="interestToDelete" required>
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+        <div>
+            <h2>Events</h2>
+            <ul id="events"></ul>
         </div>
     </div>
 
     <script src="profile.js"></script>
 </body>
+
 </html>
