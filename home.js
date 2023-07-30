@@ -7,6 +7,7 @@ const logoutlink = document.getElementById("logout")
 logoutlink.addEventListener("click", function(event) {
     event.preventDefault();
     localStorage.removeItem("userId");
+    localStorage.removeItem("email");
     window.location.href= "login.html";
 })
 
@@ -23,7 +24,7 @@ async function fetchEvents() {
 
 async function renderEvents() {
     const eventsContainer = document.getElementById("events-container");
-    eventsContainer.innerHTML = "Loading...";
+   
   
     const eventsData = await fetchEvents();
   

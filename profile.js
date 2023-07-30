@@ -1,7 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userId = localStorage.getItem('userId');
+    const logoutlink = document.getElementById("logout")
 
-  
+    logoutlink.addEventListener("click", function(event) {
+        event.preventDefault();
+        localStorage.removeItem("userId");
+        localStorage.removeItem("email");
+        window.location.href= "login.html";
+    })
+
+    
    fetchUserData(userId)
     .then((userData) => {
         displayUserData(userData);
@@ -54,6 +62,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error deleting interest:', error);
             });
     });
+
+    document.getElementById('deleteUser').addEventListener('click', () => {
+       
+        const confirmation = confirm('Are you sure you want to delete your account?');
+
+        if (confirmation) {
+            deleteUser(userId)
+                .then(() => {
+                   
+                    window.location.href = 'login.html';
+                })
+                .catch((error) => {
+                    console.error('Error deleting user:', error);
+                });
+        }
+    });
+
 
 });
 
@@ -163,5 +188,20 @@ function deleteInterest(userId, interestToDelete) {
     })
     .catch((error) => {
         console.error('Error deleting interest:', error);
+    });
+}
+
+function deleteUser(userId) {
+    
+    return fetch(`http://localhost:8080/api/user/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
     });
 }
