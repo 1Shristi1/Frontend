@@ -52,15 +52,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const city = document.getElementById("city").value;
     
 
-   const userData = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    city: city,
-    password: password,
-   }
+  //  const userData = {
+  //   firstName: firstName,
+  //   lastName: lastName,
+  //   email: email,
+  //   city: city,
+  //   password: password,
+  //  }
 
-   console.log(userData);
+   console.log({firstName,lastName,email,city,password});
 
     try {
       const response = await fetch("http://localhost:8080/api/user", {
